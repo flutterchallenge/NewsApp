@@ -15,7 +15,7 @@ class Category extends ChangeNotifier {
   String thumbnail;
   List<Category> categoryList;
 
-  Category({required this.id, required this.title, required this.description, required this.thumbnail });
+  Category(this.id,  this.title,  this.description,  this.thumbnail );
 
   factory Category.fromJson(Map<String, dynamic> json) => _$CategoryFromJson(json);
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'model/content.dart';
+import '../model/content.dart';
 
 class HomePage extends StatelessWidget {
   _contentItems(BuildContext context, List<Content> items) {
@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                content.quote,
+                content.title,
                 style: GoogleFonts.oswald(
                     textStyle: Theme.of(context).textTheme.headline4),
               ),
@@ -52,7 +52,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    StreamController<int> orientationController = StreamController<int>();
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
@@ -61,19 +60,7 @@ class HomePage extends StatelessWidget {
           IconButton(icon: Icon(Icons.vertical_split), onPressed: () {})
         ],
       ),
-      body: StreamBuilder(
-        initialData: 1,
-        stream: orientationController.stream,
-        builder: (context, snapShot) {
-          if (snapShot.hasError) {
-            return Center(
-              child: Text(snapShot.error.toString()),
-            );
-          } else if (snapShot.hasData) {
-            return _carousel(items, snapShot.data);
-          }
-        },
-      ),
+      body: Container()
     );
   }
 }

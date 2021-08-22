@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nepali_sayari/ui/page_home.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,55 +14,46 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Provider Demo Home Page'),
+      home: SplashPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+class SplashPage extends StatefulWidget {
+  final String title = "Sample App";
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _SplashPageState createState() => _SplashPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+    return Scaffold(body: FutureBuilder(
+        future: _checkTimer(),
+        builder: (context, snapshot) {
+          if(snapshot.connectionState == ConnectionState.done) {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+          }
+      return Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+          children: [
+            RichText(
+                text: TextSpan(children: <TextSpan>[
+              TextSpan(
+                  text: "My App",
+                  style: TextStyle(fontSize: 20.0, color: Colors.black)),
+              TextSpan(
+                  text: "Version 1.0.0",
+                  style: TextStyle(fontSize: 20.0, color: Colors.black)),
+            ]))
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+      );
+    }));
+  }
+
+  _checkTimer() {
+    return Future.delayed(Duration(seconds: 3), (){});
   }
 }

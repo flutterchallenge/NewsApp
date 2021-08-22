@@ -1,39 +1,17 @@
 import 'package:flutter/cupertino.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'content.g.dart';
 
+@JsonSerializable()
 class Content extends ChangeNotifier{
-  String _id;
-  String _quote;
-  String _favourite;
+  int id;
+  String title;
+  String description;
 
-  Content({String id, String quote, String favourite}) {
-    this._id = id;
-    this._quote = quote;
-    this._favourite = favourite;
-  }
+  Content( this.id,  this.title, this.description);
 
-  String get id => _id;
+  factory Content.fromJson(Map<String, dynamic> json) => _$ContentFromJson(json);
 
-  set id(String id) => _id = id;
+  Map<String, dynamic> toJson() => _$ContentToJson(this);
 
-  String get quote => _quote;
-
-  set quote(String quote) => _quote = quote;
-
-  String get favourite => _favourite;
-
-  set favourite(String favourite) => _favourite = favourite;
-
-  Content.fromJson(Map<String, dynamic> json) {
-    _id = json['id'];
-    _quote = json['quote'];
-    _favourite = json['favourite'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this._id;
-    data['quote'] = this._quote;
-    data['favourite'] = this._favourite;
-    return data;
-  }
 }
