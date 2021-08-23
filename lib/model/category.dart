@@ -9,13 +9,14 @@ part 'category.g.dart';
 
 @JsonSerializable()
 class Category extends ChangeNotifier {
-  int id;
-  String title;
-  String description;
-  String thumbnail;
-  List<Category> categoryList;
+  int? id;
+  String? title;
+  String? description;
+  String? thumbnail;
+  List<Category>? categoryList;
 
-  Category(this.id,  this.title,  this.description,  this.thumbnail);
+  Category.init();
+  Category(this.id, this.title, this.description, this.thumbnail);
 
   factory Category.fromJson(Map<String, dynamic> json) => _$CategoryFromJson(json);
 

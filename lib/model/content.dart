@@ -8,12 +8,13 @@ part 'content.g.dart';
 
 @JsonSerializable()
 class Content extends ChangeNotifier{
-  int id;
-  String title;
-  String description;
-  List<Content> contentList;
+  int? id;
+  String? title;
+  String? description;
+  List<Content> contentList = [];
 
-  Content( this.id,  this.title, this.description);
+  Content(this.id, this.title, this.description);
+  Content.init();
 
   factory Content.fromJson(Map<String, dynamic> json) => _$ContentFromJson(json);
 

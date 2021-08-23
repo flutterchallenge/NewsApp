@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../model/content.dart';
 
 class HomePage extends StatelessWidget {
+  static String TAG = "home";
   _contentItems(BuildContext context, List<Content> items) {
     return List<Widget>.generate(items.length, (index) {
       Content content = items[index];
@@ -15,7 +16,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                content.title,
+                content.title?? "",
                 style: GoogleFonts.oswald(
                     textStyle: Theme.of(context).textTheme.headline4),
               ),
@@ -47,6 +48,19 @@ class HomePage extends StatelessWidget {
           scrollDirection: orientation == 1 ? Axis.horizontal : Axis.vertical,
         ));
   }
+  
+  _todayHotPick(BuildContext context, String contentDesc) {
+     return Container(
+       height: MediaQuery.of(context).size.height * 0.2,
+       child: Card(
+         elevation: 2,
+         child: Text(
+           contentDesc,
+           style: TextStyle(fontSize: 20.0, color: Colors.black),
+         ),
+       ),
+     )
+  }
 
 
   @override
@@ -59,7 +73,13 @@ class HomePage extends StatelessWidget {
           IconButton(icon: Icon(Icons.vertical_split), onPressed: () {})
         ],
       ),
-      body: Container()
+      body: Container(
+        child: Column(
+          children: [
+             _todayHotPick(context, contentDesc)
+          ],
+        ),
+      )
     );
   }
 }
